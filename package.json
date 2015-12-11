@@ -4,6 +4,7 @@
   "description": "",
   "main": "Gruntfile.js",
   "scripts": {
+    "build": "npm run build1 && cp build/out/out.js.map tmp/out.js.map-2.6.1 && npm run build2 && cp build/out/out.js.map tmp/out.js.map-2.4.16 && node dump-mappings.js tmp/out.js.map-2.6.1 && node dump-mappings tmp/out.js.map-2.4.16",
     "build1": "grunt clean concat uglify",
     "build2": "grunt clean concat && node save-sources.js && uglifyjs --mangle --source-map-url=out.js.map --in-source-map=build/out/out.js.map --source-map-include-sources --preamble=\"/* awww yisss */\" --source-map=build/out/out.js.map --output=build/out/out.js build/out/out.js && node write-sources.js",
     "serve": "http-server build"

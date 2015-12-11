@@ -19,10 +19,8 @@ module.exports = function (grunt) {
 			},
 			compile_js: {
 				src: [
-					'concat.prefix',
 					'file1.js',
 					'file2.js',
-					'concat.suffix'
 				],
 				cwd: '.',
 				dest: '<%= build_dir %>/out.js'
@@ -31,7 +29,6 @@ module.exports = function (grunt) {
 		uglify: {
 			compile: {
 				options: {
-					banner: '/* awww yisss */',
 					preserveComments: false,
 					sourceMap: true,
 					sourceMapIncludeSources: true,

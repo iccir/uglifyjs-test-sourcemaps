@@ -1,47 +1,22 @@
 # uglifyjs-test-sourcemaps
 
-A repo to hold a test app for uglifyjs testing
+Modified and simplified from https://github.com/saibotsivad/uglifyjs-test-sourcemaps
 
-You can serve with whatever, but `http-serve` is pretty nice. `npm install -g http-serve`
+Run `npm run build`, this will build `file1.js` and `file2.js` using grunt-concat and UglifyJS2.
+Source map files are then saved to the `tmp` directory.
 
-The final `out.js.map` of `npm run build1` should be equivalent to `npm run build2`.
+`tmp/out.js.map-2.4.16` contains the map generated from UglifyJS 2.4.16
+`tmp/out.js.map-2.6.1` contains the map generated from UglifyJS 2.6.1
 
-> Note: I was not able to get the `sourcesContent` to be populated when running
-> `uglifyjs` directly (in `build2`), thus the `save-sources.js` and `populate-sources.js`
-> hack. I think this is possibly a commandline parameter I am missing in uglify-js?
+Each file is then ran through `dump-mappings.js`, which dumps out all mappings contained in the source map
+in the following format:
 
-## uglify with broken sourcemaps
+    (file name) (generated line/column) -> (original line/column)
 
-Build the system: `npm run build1`
+Notice that `out.js.map-2.6.1` contains many invalid mappings such as:
 
-Run the server: `npm run serve`
+    ../../file2.js 4:24 => 1:24
 
-Open it in the browser, look at the error thrown in the console.
+Generated position 4:24 doesn't exist in out.js, as the file is only 3 lines long.
 
-Set a breakpoint where the error is thrown.
-
-#### Expected
-
-The breakpoint should work.
-
-#### Actual
-
-The breakpoint is **not** caught.
-
-## uglify with correct sourcemaps
-
-Build the system: `npm run build2`
-
-Run the server: `npm run serve`
-
-Open it in the browser, look at the error thrown in the console.
-
-Set a breakpoint where the error is thrown.
-
-#### Expected
-
-The breakpoint should work.
-
-#### Actual
-
-The breakpoint **is** caught.
+`out.js.map-2.4.16` appears to be correct, with all mappings occuring at generated line 2.
