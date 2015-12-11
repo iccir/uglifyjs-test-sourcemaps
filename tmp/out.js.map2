@@ -1,0 +1,1 @@
+{"version":3,"file":"build/out/out.js","sources":["../../file1.js","../../file2.js"],"names":["foo","thing","console","log","inHere","input","moreThings"],"mappings":";AAAA,QAASA,KAAIC,GACZC,QAAQC,IAAIF,GCDb,QAASG,QAAOC,GACfC,WAAWD","sourcesContent":["function foo(thing) {\n\tconsole.log(thing)\n}","function inHere(input) {\n\tmoreThings(input)\n}"]}
